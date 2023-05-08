@@ -6,6 +6,8 @@ target 'Wisdom' do
   use_frameworks!
 pod 'Alamofire'
 pod 'SwiftyJSON'
+#pod 'Kingfisher', '~> 7.0'
+pod 'SDWebImage', '~> 5.0'
   # Pods for Wisdom
 
   target 'WisdomTests' do

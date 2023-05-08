@@ -8,9 +8,12 @@
 import UIKit
 
 class PagesModel: Codable, Identifiable {
-    var id = "", author : String = ""
-    var url = "", download_url : String = ""
+    var id, author : String
+    var url, download_url : String
     enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case author = "author"
+        case url = "url"
         case download_url = "download_url"
     }
 }
