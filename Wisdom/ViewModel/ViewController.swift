@@ -103,7 +103,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         case .userList:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: .pagesIdentifier, for: indexPath) as? PagesTableViewCell else { return UITableViewCell() }
             let index = indexPath.row
-            cell.authorLabel.text = translateModel[index].author + "  \(indexPath.row + 1)"
+            cell.authorLabel.text = translateModel[index].author 
             cell.descriptionLabel.text = translateModel[index].url
             if let url = URL(string: translateModel[index].download_url) {
                 if let image = SDImageCache.shared.imageFromCache(forKey: url.absoluteString) {
