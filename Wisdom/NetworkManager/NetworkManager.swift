@@ -22,8 +22,8 @@ class NetworkManager: NSObject {
     init(aPIHandler: APIHandlerDelegate = APIHandler()) {
         self.aPIHandler = aPIHandler
     }
-    func fetchRequest<T: Codable>(type: T.Type, completion: @escaping(Result<[PagesModel], DemoError>) -> Void) {
-        aPIHandler.fetchData(responseObjectType: [PagesModel].self) { success in
+    func fetchRequest<T: Codable>(type: T.Type, pageIndex: String, completion: @escaping(Result<[PagesModel], DemoError>) -> Void) {
+        aPIHandler.fetchData(responseObjectType: [PagesModel].self, pageIndex: pageIndex) { success in
             completion(.success(success))
         } failure: { error in
             completion(.failure(.NoData))
@@ -32,16 +32,16 @@ class NetworkManager: NSObject {
 }
 
 protocol APIHandlerDelegate {
-    func fetchData<T: Decodable>(responseObjectType: T.Type,
+    func fetchData<T: Decodable>(responseObjectType: T.Type, pageIndex: String,
                                  success: @escaping ([PagesModel]) -> Void,
                                  failure: @escaping (AFError) -> Void)
 }
 
 class APIHandler: APIHandlerDelegate {
-    func fetchData<T: Decodable>(responseObjectType: T.Type,
+    func fetchData<T: Decodable>(responseObjectType: T.Type, pageIndex: String,
                                  success: @escaping ([PagesModel]) -> Void,
                                  failure: @escaping (AFError) -> Void) {
-        AF.request(Pages.pages).validate()
+        AF.request(Pages.pages(page_ID: pageIndex) ).validate()
             .responseDecodable(of: [PagesModel].self) { response in
                 switch response.result {
                 case .success(let data):

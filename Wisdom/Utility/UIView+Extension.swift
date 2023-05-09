@@ -19,3 +19,26 @@ extension UIView {
         self.layer.mask = mask
     }
 }
+
+extension String {
+  static func randomString(list:[String]) -> String? {
+    assert(!list.isEmpty,"Empty Lists not supported")
+    return list.randomElement()!
+  }
+}
+
+
+extension Int {
+  static func returnQ(inq:Range<Int>) -> Int {
+    var g = SystemRandomNumberGenerator()
+    let c = Int.random(in: inq, using: &g)
+    return c
+  }
+  
+  static func randomPop(list:inout [String]) -> String {
+    assert(!list.isEmpty,"Empty Lists not supported")
+    let c = returnQ(inq: 0..<list.count)
+    let foo = list.remove(at: c)
+    return foo
+  }
+}

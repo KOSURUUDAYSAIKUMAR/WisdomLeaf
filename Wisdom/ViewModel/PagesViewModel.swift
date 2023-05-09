@@ -10,8 +10,8 @@ import SDWebImage
 
 class PagesViewModel: NSObject {
     static var pageSharedInstance = PagesViewModel()
-    func getResponseFromNetworkManager(completion: @escaping(Result<[PagesModel], DemoError>) -> Void) {
-        NetworkManager.shared.fetchRequest(type: [PagesModel].self) { result in
+    func getResponseFromNetworkManager(page: String, completion: @escaping(Result<[PagesModel], DemoError>) -> Void) {
+        NetworkManager.shared.fetchRequest(type: [PagesModel].self, pageIndex: page) { result in
             switch result {
             case .success(let data):
                 data.map { model in
